@@ -12,14 +12,14 @@ class UserCount extends BaseWidget
     {
         return [
             //
-            Stat::make('Total Users', User::where('usertype', ['user', '', null])->count())
+            Stat::make('Users', User::where('usertype', ['user', '', null])->count())
                 ->icon('heroicon-o-user-group')
                 ->description('The total count of users')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
                 ->extraAttributes([
                     'class' => 'cursor-pointer',
                 ]),
-            Stat::make('Total Artists', User::where('usertype', 'artist')->count())
+            Stat::make('Artists', User::where('usertype', 'artist')->count())
                 ->icon('heroicon-o-users')
                 ->description('The total count of artists')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')

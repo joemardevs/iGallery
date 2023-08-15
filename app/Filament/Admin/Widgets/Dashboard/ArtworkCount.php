@@ -9,19 +9,20 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class ArtworkCount extends BaseWidget
 {
+    protected static ?int $sort = 0;
     protected function getStats(): array
     {
 
         return [
             //
-            Stat::make('Total Artworks', Artwork::count())
+            Stat::make('Artworks', Artwork::count())
                 ->icon('heroicon-o-paint-brush')
                 ->description('The total count of artwork')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
                 ->extraAttributes([
                     'class' => 'cursor-pointer',
                 ]),
-            Stat::make('Total Category', Category::count())
+            Stat::make('Categories', Category::count())
                 ->icon('heroicon-o-tag')
                 ->description('The total count of artwork')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')

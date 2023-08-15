@@ -75,7 +75,7 @@ class UserResource extends Resource
                     ->options([
                         'artist' => 'Artist',
                         'user' => 'User',
-                    ])->selectablePlaceholder(false),
+                    ]),
             ])
             ->filters([
                 //
