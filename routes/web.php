@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// To view the sign in
+Route::get('/sign-in', function () {
+    return view('livewire.auth.sign-in');
+})->name('sign-in');
+
+// To view the register
+Route::get('/register', function () {
+    return view('livewire.auth.register');
+})->name('register');
+
+// To view the forgot-password
+Route::get('/forgot-password', function () {
+    return view('livewire.auth.forgot-password');
+})->name('forgot-password');

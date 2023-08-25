@@ -44,17 +44,17 @@ class UserResource extends Resource
                 TextInput::make('email')
                     ->email()
                     ->required(),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
+                // TextInput::make('password')
+                //     ->password()
+                //     ->required(),
                 DateTimePicker::make('email_verified_at')
                     ->required(),
-                FileUpload::make('profile_img'),
                 Select::make('usertype')
                     ->options([
                         'artist' => 'Artist',
                         'user' => 'User',
                     ]),
+                FileUpload::make('profile_img'),
             ]);
     }
 
