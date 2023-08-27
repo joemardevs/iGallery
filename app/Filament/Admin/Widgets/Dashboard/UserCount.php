@@ -26,13 +26,10 @@ class UserCount extends BaseWidget
                 ->extraAttributes([
                     'class' => 'cursor-pointer',
                 ]),
-            Stat::make('Unverified Accounts', User::where('email_verified_at', null)->count())
-                ->icon('heroicon-o-user')
-                ->description('The total count of unverified account')
-                ->descriptionIcon('heroicon-o-arrow-trending-up')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
         ];
+    }
+    protected function getColumns(): int
+    {
+        return 2;
     }
 }

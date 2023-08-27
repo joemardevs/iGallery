@@ -31,4 +31,8 @@ class ArtworkCount extends BaseWidget
                 ]),
         ];
     }
+    protected function getColumns(): int
+    {
+        return 2;
+    }
 }

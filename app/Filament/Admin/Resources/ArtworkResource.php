@@ -40,7 +40,16 @@ class ArtworkResource extends Resource
                     ->minLength(2)
                     ->maxLength(255),
                 Forms\Components\Select::make('category_id')
-                    ->options(Category::pluck('name', 'id')),
+                    ->label('Category')
+                    ->relationship('category', 'name')
+                    ->required()
+                    ->native(false)
+                    ->createOptionForm(
+                        [
+                            Forms\Components\TextInput::make('name')
+                                ->required()
+                        ]
+                    ),
                 Forms\Components\TextInput::make('size')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
@@ -62,10 +71,12 @@ class ArtworkResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('artwork_image'),
+                Tables\Columns\ImageColumn::make('artwork_image')
+                    ->label('Image'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\SelectColumn::make('category_id')
+                    ->label('Category')
                     ->options(Category::pluck('name', 'id')),
                 Tables\Columns\TextColumn::make('price')
                     ->money('php')

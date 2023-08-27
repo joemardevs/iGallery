@@ -50,6 +50,8 @@ class UserResource extends Resource
                 DateTimePicker::make('email_verified_at')
                     ->required(),
                 Select::make('usertype')
+                    ->required()
+                    ->native(false)
                     ->options([
                         'artist' => 'Artist',
                         'user' => 'User',
@@ -65,6 +67,7 @@ class UserResource extends Resource
             ->columns([
                 //
                 ImageColumn::make('profile_img')
+                    ->label('Avatar')
                     ->circular()
                     ->defaultImageUrl(fn ($record) => $record->avatar_url),
                 TextColumn::make('name')->searchable(),
