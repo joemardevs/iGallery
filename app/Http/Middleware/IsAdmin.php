@@ -18,7 +18,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         $userType = Auth::user()->usertype;
-        if ($userType == 'admin') {
+        if ($userType == UserTypeEnum::ADMIN->value) {
             return $next($request);
         }
         Auth::logout();
