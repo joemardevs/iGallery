@@ -14,7 +14,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     {{-- alpinejs --}}
-    <script src="//unpkg.com/alpinejs" defer></script>
+    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
 </head>
 
 <body class="antialiased bg-gray-100 ">

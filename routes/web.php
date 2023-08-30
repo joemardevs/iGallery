@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,7 +57,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth')->group(function () {
 
     //View the home if authenticated
-    Route::get('/home', function () {
-        return view('livewire.pages.index');
-    })->name('home');
+    Route::get('/home', [ArtworkController::class, 'index'])
+        ->name('home');
+    Route::get('/artwork/{artwork}', [ArtworkController::class, 'show'])
+        ->name('show.artwork');
 });

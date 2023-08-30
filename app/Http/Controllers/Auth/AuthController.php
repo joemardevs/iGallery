@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,6 +53,9 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if (auth()->attempt($validatedForm)) {
+            if (auth()->user()->usertype == UserTypeEnum::ADMIN->value) {
+                return redirect('/admin');
+            }
             return redirect()->route('home')
                 ->with('success', 'Login successful');
         }
