@@ -3,15 +3,13 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Admin\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Admin\Resources\UserResource\Pages\EditUser;
 use App\Models\User;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DateTimePicker;
@@ -21,7 +19,8 @@ use Filament\Forms\Components\Section;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
 {
@@ -38,25 +37,44 @@ class UserResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')
-                    ->required()
-                    ->minLength(2),
-                TextInput::make('email')
-                    ->email()
-                    ->required(),
-                // TextInput::make('password')
-                //     ->password()
-                //     ->required(),
-                DateTimePicker::make('email_verified_at')
-                    ->required(),
-                Select::make('usertype')
-                    ->required()
-                    ->native(false)
-                    ->options([
-                        'artist' => 'Artist',
-                        'user' => 'User',
-                    ]),
-                FileUpload::make('profile_img'),
+                Section::make('User Details')->schema([
+                    TextInput::make('name')
+                        ->required()
+                        ->minLength(2),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->unique(ignoreRecord: true),
+                    TextInput::make('password')
+                        ->password()
+                        ->required()
+                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                        ->visible(fn ($livewire) => $livewire instanceof CreateUser)
+                        ->rule(Password::default()),
+                    DateTimePicker::make('email_verified_at')
+                        ->required(),
+                    Select::make('usertype')
+                        ->required()
+                        ->native(false)
+                        ->options([
+                            'artist' => 'Artist',
+                            'user' => 'User',
+                        ]),
+                    FileUpload::make('profile_img'),
+                ])->columns(2),
+                Section::make('User New Password')->schema([
+                    TextInput::make('new_password')
+                        ->label('New Password')
+                        ->password()
+                        ->nullable()
+                        ->rule(Password::default()),
+                    TextInput::make('new_password_confirmation')
+                        ->label('New Password Confirmation')
+                        ->password()
+                        ->same('new_password')
+                        ->requiredWith('new_password')
+                ])->visible(fn ($livewire) => $livewire instanceof EditUser)
+                    ->columns(2),
             ]);
     }
 

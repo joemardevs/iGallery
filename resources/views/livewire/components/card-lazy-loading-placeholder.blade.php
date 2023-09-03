@@ -5,7 +5,7 @@
                 <div class="p-4 md:w-96 md:h-[410px]">
                     <div
                         class="h-full border-2 border-gray-200 dark:border-gray-700 border-opacity-60 rounded-lg overflow-hidden">
-                        <div class="lg:h-48 md:h-36 md:w-[280px] w-[440px] h-48 bg-gray-200 object-cover object-center">
+                        <div class="lg:h-48 md:h-36 md:w-[280px] w-[440px] h-64 bg-gray-200 object-cover object-center">
                         </div>
                         <div class="p-6">
                             <h2
@@ -16,10 +16,7 @@
                                 class="text-xl font-medium text-gray-900 dark:text-gray-50 bg-gray-200 w-3/4 h-8 rounded-full">
                                 {{-- Title --}}
                             </h1>
-                            <small class="bg-gray-300 w-20 h-4 block rounded-full my-1">{{-- Created Date --}}</small>
-                            <p class="leading-relaxed mb-3 bg-gray-200 w-full h-4 rounded-full">
-                                {{-- Description --}}
-                            </p>
+                            <small class="bg-gray-300 w-28 h-4 block rounded-full my-1">{{-- Created Date --}}</small>
                             <p class="leading-relaxed mb-3 bg-gray-200 w-full h-4 rounded-full">
                                 {{-- Description --}}
                             </p>
