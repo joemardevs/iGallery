@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artwork;
 use Illuminate\Http\Request;
 
-class ArtworkController extends Controller
+class FilterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +12,7 @@ class ArtworkController extends Controller
     public function index()
     {
         //
-        $artworks = Artwork::oldest()->paginate(10);
-        return view('livewire.pages.index', [
-            'artworks' => $artworks,
-        ]);
+        return view('livewire.pages.filter.index');
     }
 
     /**
@@ -41,10 +37,6 @@ class ArtworkController extends Controller
     public function show(string $id)
     {
         //
-        $artwork = Artwork::findOrFail($id);
-        return view('livewire.pages.show', [
-            'artwork' => $artwork
-        ]);
     }
 
     /**

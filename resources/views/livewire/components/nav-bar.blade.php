@@ -35,12 +35,14 @@
                 <hr class="boder-gray-200 dark:border-gray-600 w-80">
                 <h1 class="text-xl">{{ auth()->user()->name }}</h1>
                 <hr class="boder-gray-200 dark:border-gray-600 w-80">
-                <div class="flex flex-col font-semibold items-center justify-between gap-4 h-screen">
-                    <div>
+                <div class="flex flex-col font-semibold justify-between h-screen">
+                    <div class="flex flex-col items-center">
                         <a href="{{ route('home') }}">
                             <p class="p-2" @click="open = !open">Home</p>
                         </a>
-                        <p class="p-2">Filters</p>
+                        <a href="{{ route('filter') }}">
+                            <p class="p-2" @click="open = !open">Filter</p>
+                        </a>
                     </div>
                     <a href="{{ route('logout') }}" class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
