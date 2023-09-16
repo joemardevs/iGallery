@@ -1,11 +1,11 @@
 <div>
-    <section class="text-gray-600 dark:text-gray-200 animate-pulse">
+    <section class="dark:text-gray-200  animate-pulse">
         <div class="container mx-auto">
             <div class="flex flex-wrap -m-4">
                 <div class="p-4 md:w-96 md:h-[410px]">
                     <div
                         class="h-full border-2 border-gray-200 dark:border-gray-700 border-opacity-60 rounded-lg overflow-hidden">
-                        <div class="lg:h-48 md:h-36 md:w-[280px] w-[440px] h-64 bg-gray-200 object-cover object-center">
+                        <div class="lg:h-48 md:h-36 md:w-[280px] w-[365px] h-64 bg-gray-200">
                         </div>
                         <div class="p-6">
                             <h2

@@ -37,20 +37,33 @@
                 <hr class="boder-gray-200 dark:border-gray-600 w-80">
                 <div class="flex flex-col font-semibold justify-between h-screen">
                     <div class="flex flex-col items-center">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('home') }}" class="px-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
                             <p class="p-2" @click="open = !open">Home</p>
                         </a>
-                        <a href="{{ route('filter') }}">
+                        <a href="{{ route('filter') }}" class="px-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
                             <p class="p-2" @click="open = !open">Filter</p>
                         </a>
                     </div>
-                    <a href="{{ route('logout') }}" class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-between w-80">
+                        <a href="{{ route('logout') }}"
+                            class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            </svg>
+                            <p class="p-2" @click="open = !open">Logout</p>
+                        </a>
+                        <a href="{{ route('profile') }}"
+                            class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.7" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <p class="p-2" @click="open = !open">Profile</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </aside>

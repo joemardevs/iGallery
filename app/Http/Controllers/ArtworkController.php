@@ -13,7 +13,7 @@ class ArtworkController extends Controller
     public function index()
     {
         //
-        $artworks = Artwork::oldest()->paginate(10);
+        $artworks = Artwork::inRandomOrder()->paginate(10);
         return view('livewire.pages.index', [
             'artworks' => $artworks,
         ]);

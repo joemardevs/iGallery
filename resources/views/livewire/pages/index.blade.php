@@ -9,7 +9,7 @@
         <h1 class="text-2xl text-center my-4 font-semibold">Home</h1>
         <hr class="dark:border-gray-700 mb-4">
         <div class="md:grid grid-cols-4 gap-4">
-            @foreach ($artworks as $artwork)
+            @foreach ($artworks->shuffle() as $artwork)
                 @if ($artwork->category)
                     {{-- Display this if there's a category on the artworks --}}
                     <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
@@ -29,7 +29,7 @@
             @endforeach
         </div>
         @if ($artworks)
-            <div class="my-8">
+            <div class="my-8 z-0">
                 {{ $artworks->links() }}
             </div>
         @endif
