@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artwork;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,19 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($category, Request $request)
     {
         //
+        $artworks = Artwork::whereHas('category', function ($query) use ($category) {
+            $query->where('name', $category);
+        })->paginate(8);
+
+        $uri = $request->path();
+
+        return view('livewire.pages.category.index', [
+            'artworks' => $artworks,
+            'uri' => $uri
+        ]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -46,29 +47,44 @@ Route::middleware('guest')->group(function () {
 // Auth Controller
 Route::controller(AuthController::class)->group(function () {
     //Submit a data to sign in
-    Route::post('/sign-in', 'signIn')->name('sign-in');
+    Route::post('/sign-in', 'signIn')
+        ->name('sign-in');
 
     //Submit a data to register
-    Route::post('/register', 'store')->name('register');
+    Route::post('/register', 'store')
+        ->name('register');
 
     //Logout
-    Route::get('/signout', 'signOut')->name('logout');
+    Route::get('/signout', 'signOut')
+        ->name('logout');
 });
 
 
 Route::middleware('auth')->group(function () {
 
-    //View the home if authenticated
-    Route::get('/home', [ArtworkController::class, 'index'])
-        ->name('home');
-    Route::get('/artwork/{artwork}', [ArtworkController::class, 'show'])
-        ->name('show.artwork');
+    //If authenticated view artwork/s
+    Route::controller(ArtworkController::class)->group(function () {
+        Route::get('/home', 'index')
+            ->name('home');
+        Route::get('/artwork/{artwork}', 'show')
+            ->name('show.artwork');
+    });
 
     // Filter
     Route::get('/filter', [FilterController::class, 'index'])->name('filter');
 
-    //Auth profile
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::patch('/profile/update-profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('profile/update-password/{user}', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+    //Edit profile
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'index')->name('profile');
+        Route::patch('/profile/update-profile/{user}', 'update')
+            ->name('profile.update');
+        Route::patch('profile/update-password/{user}', 'updatePassword')
+            ->name('profile.updatePassword');
+    });
+
+    // Show artworks by category
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category/{category}', 'index')
+            ->name('show.artworks.by.category');
+    });
 });

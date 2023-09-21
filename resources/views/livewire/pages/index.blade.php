@@ -1,15 +1,14 @@
 @extends('livewire.layouts.app')
 @section('title')
-    Home
 @endsection
 @section('content')
     <livewire:components.nav-bar />
     <div class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4">
         <livewire:components.success-alert />
-        <h1 class="text-2xl text-center my-4 font-semibold">Home</h1>
+        <h1 class="text-2xl text-center my-4 font-semibold"></h1>
         <hr class="dark:border-gray-700 mb-4">
         <div class="md:grid grid-cols-4 gap-4">
-            @foreach ($artworks->shuffle() as $artwork)
+            @foreach ($artworks as $artwork)
                 @if ($artwork->category)
                     {{-- Display this if there's a category on the artworks --}}
                     <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
