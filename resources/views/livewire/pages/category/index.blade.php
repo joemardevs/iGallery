@@ -1,5 +1,6 @@
 @extends('livewire.layouts.app')
 @section('title')
+    {{ str_replace('category/', '', $uri) }}
 @endsection
 @section('content')
     <livewire:components.nav-bar />

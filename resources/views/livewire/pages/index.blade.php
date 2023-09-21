@@ -1,5 +1,6 @@
 @extends('livewire.layouts.app')
 @section('title')
+    Home
 @endsection
 @section('content')
     <livewire:components.nav-bar />
