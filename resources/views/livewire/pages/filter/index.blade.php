@@ -8,16 +8,20 @@
         <h1 class="font-semibold text-gray-50">Filters</h1>
         <livewire:components.toggle-theme />
     </nav>
-    <main class="px-4 py-24 flex flex-col items-center gap-6 bg-gray-50 dark:bg-gray-900 h-screen">
+    <form action="{{ route('filter.artworks') }}" method="get"
+        class="px-4 py-24 flex flex-col items-center gap-6 bg-gray-50 dark:bg-gray-900 h-screen">
+        @csrf
         <div class="text-center">
             <small class="dark:text-gray-200">
                 Select a category
             </small>
             <div>
                 <select name="category" id="category"
-                    class="px-4 py-2 my-2 rounded-md bg-gray-300 dark:bg-gray-600 text-gray-400">
+                    class="px-4 py-2 my-2 rounded-md bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-pointer" required>
                     <option value="">Click here to select category</option>
-                    <option value="">Painting</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -38,8 +42,8 @@
         <div class="flex flex-col items-center gap-4 py-8 fixed bottom-0">
             <livewire:components.primary-button label='Apply' />
             <a href="{{ route('home') }}">
-                <button class="dark:text-gray-200">Back</button>
+                <button type="button" class="dark:text-gray-200">Back</button>
             </a>
         </div>
-    </main>
+    </form>
 @endsection

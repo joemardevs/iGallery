@@ -18,7 +18,7 @@
 
                 </div>
                 <div>
-                    <small class="font-bold">{{ session('error') }}</small>
+                    <small>{{ session('error') }}</small>
                 </div>
             </div>
         </div>

@@ -71,7 +71,8 @@ Route::middleware('auth')->group(function () {
     });
 
     // Filter
-    Route::get('/filter', [FilterController::class, 'index'])->name('filter');
+    Route::get('/filter', [FilterController::class, 'index'])
+        ->name('filter');
 
     //Edit profile
     Route::controller(ProfileController::class)->group(function () {
@@ -86,5 +87,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category/{category}', 'index')
             ->name('show.artworks.by.category');
+    });
+
+    Route::controller(FilterController::class)->group(function () {
+        Route::get('/filter/artworks', 'show')
+            ->name('filter.artworks');
     });
 });

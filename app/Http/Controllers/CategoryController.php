@@ -22,7 +22,8 @@ class CategoryController extends Controller
 
         return view('livewire.pages.category.index', [
             'artworks' => $artworks,
-            'uri' => $uri
+            'uri' => $uri,
+            'title' => $category
         ]);
     }
 
