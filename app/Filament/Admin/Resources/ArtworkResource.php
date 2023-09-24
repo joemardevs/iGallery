@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ArtworkResource\Pages;
-use App\Filament\Resources\ArtworkResource\RelationManagers;
 use App\Models\Artwork;
 use App\Models\Category;
 use Filament\Forms;
@@ -11,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ArtworkResource extends Resource
 {
@@ -20,7 +17,7 @@ class ArtworkResource extends Resource
 
     protected static ?string $navigationGroup = 'Management';
     protected static ?string $navigationIcon = 'heroicon-o-paint-brush';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
     protected static ?string $activeNavigationIcon = 'heroicon-s-paint-brush';
 
 
@@ -50,14 +47,23 @@ class ArtworkResource extends Resource
                                 ->required()
                         ]
                     ),
+                Forms\Components\Select::make('artist_id')
+                    ->label('Artist')
+                    ->relationship('artist', 'name')
+                    ->required()
+                    ->native(false)
+                    ->createOptionForm(
+                        [
+                            Forms\Components\TextInput::make('name')
+                                ->required()
+                        ]
+                    ),
                 Forms\Components\TextInput::make('size')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->prefix('PHP'),
-                Forms\Components\TextInput::make('artist_name')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('medium')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
@@ -75,6 +81,8 @@ class ArtworkResource extends Resource
                     ->label('Image'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('artist.name')
+                    ->searchable(),
                 Tables\Columns\SelectColumn::make('category_id')
                     ->label('Category')
                     ->options(Category::pluck('name', 'id')),
@@ -82,6 +90,7 @@ class ArtworkResource extends Resource
                     ->money('php')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_date')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->date()
                     ->sortable(),
             ])

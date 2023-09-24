@@ -20,7 +20,6 @@ class ArtworkFactory extends Factory
             //
             'title' => fake()->word(),
             'price' => fake()->numberBetween($min = 10000, $max = 100000),
-            'artist_name' => fake()->name(),
             'description' => fake()->sentence(),
             'address' => fake()->city(),
             'created_date' => fake()->date($format = 'Y-m-d', $max = 'now'),

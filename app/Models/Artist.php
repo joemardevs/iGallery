@@ -2,24 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends Authenticatable
+class Artist extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    // getting the usertype emplty, null, user and artist and displaying it in the UserResouce.php
-    public function scopeDisplayUserOnly(Builder $query)
+    use HasFactory;
+    protected $guarded = [];
+    public function artwork(): BelongsToMany
     {
-        return $query->whereIn('usertype', ['user'])
-            ->orWhereNull('usertype')
-            ->orWhere('usertype', '');
+        return $this->belongsToMany(Artwork::class, 'artist_id');
     }
     public function getAvatarUrlAttribute()
     {
@@ -33,19 +26,6 @@ class User extends Authenticatable
         // Return the UI Avatars API URL with the initials
         return 'https://ui-avatars.com/api/?name=' . urlencode($initials) . '&color=FFFFFF&background=09090b';
     }
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'profile_img',
-        'email_verified_at'
-    ];
-
     /**
      * The attributes that should be hidden for serialization.
      *

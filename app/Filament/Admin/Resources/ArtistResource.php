@@ -2,39 +2,38 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\UserResource\Pages;
-use App\Filament\Admin\Resources\UserResource\Pages\CreateUser;
-use App\Filament\Admin\Resources\UserResource\Pages\EditUser;
-use App\Models\User;
+use App\Filament\Admin\Resources\ArtistResource\Pages;
+use App\Filament\Admin\Resources\ArtistResource\Pages\CreateArtist;
+use App\Models\Artist;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Section;
 use Filament\Support\Enums\IconPosition;
+use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class UserResource extends Resource
+class ArtistResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Artist::class;
 
     protected static ?string $navigationGroup = 'Management';
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?int $navigationSort = 1;
-    protected static ?string $activeNavigationIcon = 'heroicon-s-users';
+    protected static ?int $navigationSort = 0;
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-user-group';
+
 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
                 Section::make('User Details')->schema([
                     TextInput::make('name')
                         ->required()
@@ -47,32 +46,18 @@ class UserResource extends Resource
                         ->password()
                         ->required()
                         ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                        ->visible(fn ($livewire) => $livewire instanceof CreateUser)
+                        ->visible(fn ($livewire) => $livewire instanceof CreateArtist)
                         ->rule(Password::default()),
                     DateTimePicker::make('email_verified_at')
                         ->required(),
                     FileUpload::make('profile_img'),
                 ])->columns(2),
-                Section::make('User New Password')->schema([
-                    TextInput::make('new_password')
-                        ->label('New Password')
-                        ->password()
-                        ->nullable()
-                        ->rule(Password::default()),
-                    TextInput::make('new_password_confirmation')
-                        ->label('New Password Confirmation')
-                        ->password()
-                        ->same('new_password')
-                        ->requiredWith('new_password')
-                ])->visible(fn ($livewire) => $livewire instanceof EditUser)
-                    ->columns(2),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->query(User::displayUserOnly())
             ->columns([
                 //
                 ImageColumn::make('profile_img')
@@ -83,6 +68,7 @@ class UserResource extends Resource
                 TextColumn::make('email')->searchable()
                     ->icon('heroicon-m-envelope')
                     ->iconPosition(IconPosition::Before),
+
             ])
             ->filters([
                 //
@@ -111,9 +97,10 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            //comment if you want a modal
+            'index' => Pages\ListArtists::route('/'),
+            'create' => Pages\CreateArtist::route('/create'),
+            // 'edit' => Pages\EditArtist::route('/{record}/edit'),
         ];
     }
 }

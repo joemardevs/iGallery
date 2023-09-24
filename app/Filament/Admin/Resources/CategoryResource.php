@@ -14,15 +14,13 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
     protected static ?string $navigationGroup = 'Management';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
     protected static ?string $activeNavigationIcon = 'heroicon-s-tag';
     protected static ?string $navigationLabel = 'Categories';
 
@@ -91,8 +89,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
+            //comment if you want a modal
             'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
+            // 'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
             'view' => Pages\ViewCategory::route('/{record}'),
 

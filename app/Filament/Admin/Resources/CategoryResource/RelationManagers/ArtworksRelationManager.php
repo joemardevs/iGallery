@@ -35,9 +35,12 @@ class ArtworksRelationManager extends RelationManager
                     ->numeric()
                     ->money('php')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('artist.name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_date')
                     ->dateTime('M d, Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -45,15 +48,8 @@ class ArtworksRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
+            ->actions([])
+            ->bulkActions([])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);

@@ -13,18 +13,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('artworks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->unsignedBigInteger('artist_id')->nullable();
             $table->string('artwork_image')->nullable();
             $table->string('title');
             $table->foreignIdFor(Category::class)->nullable();
             $table->string('size')->nullable();
             $table->float('price');
-            $table->string('artist_name')->nullable();
             $table->string('medium')->nullable();
             $table->string('description');
             $table->string('address');
             $table->date('created_date')->nullable();
             $table->timestamps();
+
+            $table->foreign('artist_id')->references('id')->on('artists');
         });
     }
 

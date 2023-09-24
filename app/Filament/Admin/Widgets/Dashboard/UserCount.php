@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Widgets\Dashboard;
 
+use App\Models\Artist;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -19,7 +20,7 @@ class UserCount extends BaseWidget
                 ->extraAttributes([
                     'class' => 'cursor-pointer',
                 ]),
-            Stat::make('Artists', User::where('usertype', 'artist')->count())
+            Stat::make('Artists', Artist::count())
                 ->icon('heroicon-o-users')
                 ->description('The total count of artists')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
