@@ -15,7 +15,6 @@
                 description="{{ $artwork->description }}" title="{{ $artwork->title }}"
                 artistName="{{ $artwork->artist->name }}" price="{{ $artwork->price }}" />
         @endif
-        {{-- <livewire:components.show-lazy-loading-artwork-card /> --}}
     </div>
     <livewire:components.footer />
 @endsection

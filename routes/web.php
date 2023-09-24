@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -92,5 +93,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(FilterController::class)->group(function () {
         Route::get('/filter/artworks', 'show')
             ->name('filter.artworks');
+    });
+
+    Route::controller(ArtistController::class)->group(function () {
+        Route::get('/artist/{artist}', 'index')
+            ->name('artist.profile');
     });
 });

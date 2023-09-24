@@ -22,7 +22,6 @@ return new class extends Migration
             $table->float('price');
             $table->string('medium')->nullable();
             $table->string('description');
-            $table->string('address');
             $table->date('created_date')->nullable();
             $table->timestamps();
 

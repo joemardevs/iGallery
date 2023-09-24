@@ -16,7 +16,8 @@
                     </div>
                     <p class="text-justify">{{ $description }}</p>
                     <div class="flex mt-6 items-center justify-between pb-5 border-b dark:border-gray-700 mb-5">
-                        <small class="mr-3">Artist: {{ $artistName }}</small>
+                        <small class="mr-3">Artist: <a
+                                href="{{ route('artist.profile', ['artist' => $artistName]) }}">{{ $artistName }}</a></small>
                         <small>₱ {{ $price }}.00</small>
                     </div>
                 </div>

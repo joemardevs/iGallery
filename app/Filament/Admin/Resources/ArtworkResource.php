@@ -51,13 +51,7 @@ class ArtworkResource extends Resource
                     ->label('Artist')
                     ->relationship('artist', 'name')
                     ->required()
-                    ->native(false)
-                    ->createOptionForm(
-                        [
-                            Forms\Components\TextInput::make('name')
-                                ->required()
-                        ]
-                    ),
+                    ->native(false),
                 Forms\Components\TextInput::make('size')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
@@ -65,9 +59,6 @@ class ArtworkResource extends Resource
                     ->numeric()
                     ->prefix('PHP'),
                 Forms\Components\TextInput::make('medium')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('created_date'),
             ]);
