@@ -2,9 +2,11 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Enums\UserTypeEnum;
 use App\Filament\Admin\Resources\ArtistResource\Pages;
 use App\Filament\Admin\Resources\ArtistResource\Pages\CreateArtist;
-use App\Models\Artist;
+use App\Filament\Admin\Resources\ArtistResource\Pages\EditArtist;
+use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -21,9 +23,10 @@ use Illuminate\Validation\Rules\Password;
 
 class ArtistResource extends Resource
 {
-    protected static ?string $model = Artist::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationGroup = 'Management';
+    protected static ?string $label = 'Artists';
     protected static ?int $navigationSort = 0;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $activeNavigationIcon = 'heroicon-s-user-group';
@@ -34,30 +37,45 @@ class ArtistResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('User Details')->schema([
-                    TextInput::make('name')
-                        ->required()
-                        ->minLength(2),
-                    TextInput::make('email')
-                        ->email()
-                        ->required()
-                        ->unique(ignoreRecord: true),
-                    TextInput::make('password')
+                Section::make('User Details')
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->minLength(2),
+                        TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->unique(ignoreRecord: true),
+                        TextInput::make('password')
+                            ->password()
+                            ->required()
+                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                            ->visible(fn ($livewire) => $livewire instanceof CreateArtist)
+                            ->rule(Password::default()),
+                        DateTimePicker::make('email_verified_at')
+                            ->required(),
+                        FileUpload::make('profile_img'),
+                    ])->columns(2),
+                Section::make('User New Password')->schema([
+                    TextInput::make('new_password')
+                        ->label('New Password')
                         ->password()
-                        ->required()
-                        ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                        ->visible(fn ($livewire) => $livewire instanceof CreateArtist)
+                        ->nullable()
                         ->rule(Password::default()),
-                    DateTimePicker::make('email_verified_at')
-                        ->required(),
-                    FileUpload::make('profile_img'),
-                ])->columns(2),
+                    TextInput::make('new_password_confirmation')
+                        ->label('New Password Confirmation')
+                        ->password()
+                        ->same('new_password')
+                        ->requiredWith('new_password')
+                ])->visible(fn ($livewire) => $livewire instanceof EditArtist)
+                    ->columns(2),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->query(User::where('usertype', UserTypeEnum::ARTIST->value))
             ->columns([
                 //
                 ImageColumn::make('profile_img')
@@ -100,7 +118,7 @@ class ArtistResource extends Resource
             //comment if you want a modal
             'index' => Pages\ListArtists::route('/'),
             'create' => Pages\CreateArtist::route('/create'),
-            // 'edit' => Pages\EditArtist::route('/{record}/edit'),
+            'edit' => Pages\EditArtist::route('/{record}/edit'),
         ];
     }
 }

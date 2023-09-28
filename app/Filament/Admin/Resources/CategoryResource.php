@@ -92,7 +92,7 @@ class CategoryResource extends Resource
             //comment if you want a modal
             'index' => Pages\ListCategories::route('/'),
             // 'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            // 'edit' => Pages\EditCategory::route('/{record}/edit'),
             'view' => Pages\ViewCategory::route('/{record}'),
 
         ];

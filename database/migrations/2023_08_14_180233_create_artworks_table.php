@@ -25,7 +25,10 @@ return new class extends Migration
             $table->date('created_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->foreign('artist_id')
+                ->references('id')
+                ->on('users')
+                ->where('usertype', '=', 'artist');
         });
     }
 

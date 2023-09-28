@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\ArtworkResource\Pages;
 use App\Models\Artwork;
 use App\Models\Category;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -49,9 +50,12 @@ class ArtworkResource extends Resource
                     ),
                 Forms\Components\Select::make('artist_id')
                     ->label('Artist')
-                    ->relationship('artist', 'name')
                     ->required()
-                    ->native(false),
+                    ->native(false)
+                    ->options(function () {
+                        // Retrieve artists from the User model with usertype 'artist'
+                        return User::where('usertype', 'artist')->pluck('name', 'id');
+                    }),
                 Forms\Components\TextInput::make('size')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
@@ -73,6 +77,7 @@ class ArtworkResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('artist.name')
+                    ->label('Artist Name')
                     ->searchable(),
                 Tables\Columns\SelectColumn::make('category_id')
                     ->label('Category')

@@ -5,7 +5,7 @@
 @section('content')
     <div class="bg-gray-50 dark:bg-gray-900 h-screen grid place-items-center">
         <section
-            class="text-gray-700 dark:text-gray-100 border border-gray-300  dark:border-gray-700 bg-gray-200 dark:bg-gray-800 h-[480px] w-96 rounded-md">
+            class="text-gray-700 dark:text-gray-100 border border-gray-300  dark:border-gray-700 bg-gray-200 dark:bg-gray-800 w-96 rounded-md">
             <form action="" method="post">
                 @csrf
                 <div class="p-4">
@@ -17,7 +17,14 @@
                         <livewire:components.toggle-theme />
                     </div>
                     <hr class="mt-4 border-gray-300 dark:border-gray-500">
-                    <div class="my-8">
+                    <div class="mt-4">
+                        <label for="usertype">Type of account</label>
+                        <select name="usertype" id="usertype"
+                            class="px-4 py-2 my-2 rounded-md bg-gray-300 dark:bg-gray-600 text-sm text-gray-500 cursor-pointer w-full"
+                            required>
+                            <option value="user">User</option>
+                            <option value="artist">Artist</option>
+                        </select>
                         <div class="flex flex-col">
                             <label for="name">Name <span class="text-red-600 dark:text-red-400">*</span></label>
                             <livewire:components.text-input type='text' name='name' id='name'

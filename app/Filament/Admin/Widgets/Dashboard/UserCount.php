@@ -20,7 +20,7 @@ class UserCount extends BaseWidget
                 ->extraAttributes([
                     'class' => 'cursor-pointer',
                 ]),
-            Stat::make('Artists', Artist::count())
+            Stat::make('Artists', User::where('usertype', 'artist')->count())
                 ->icon('heroicon-o-users')
                 ->description('The total count of artists')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')

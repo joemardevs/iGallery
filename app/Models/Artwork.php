@@ -16,6 +16,6 @@ class Artwork extends Model
     }
     public function artist(): BelongsTo
     {
-        return $this->belongsTo(Artist::class, 'artist_id');
+        return $this->belongsTo(User::class);
     }
 }

@@ -37,6 +37,7 @@ class AuthController extends Controller
         $validatedForm = $request->validate([
             'name' => ['required', 'min:5'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'usertype' => 'required',
             'password' => 'required|min:8'
         ]);
         $validatedForm['password'] = bcrypt($validatedForm['password']);

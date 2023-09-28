@@ -22,9 +22,16 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@gmail.com',
+            'name' => 'User Name',
+            'email' => 'user@gmail.com',
             'usertype' => 'user',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Artist Name',
+            'email' => 'artist@gmail.com',
+            'usertype' => 'artist',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
