@@ -14,19 +14,19 @@ class UserCount extends BaseWidget
         return [
             //
             Stat::make('Users', User::where('usertype', ['user', '', null])->count())
-                ->icon('heroicon-o-user-group')
-                ->description('The total count of users')
-                ->descriptionIcon('heroicon-o-arrow-trending-up')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
+                ->icon('heroicon-s-user-group')
+                ->description('The total count of users'),
+            // ->descriptionIcon('heroicon-o-arrow-trending-up')
+            // ->extraAttributes([
+            //     'class' => 'cursor-pointer',
+            // ]),
             Stat::make('Artists', User::where('usertype', 'artist')->count())
-                ->icon('heroicon-o-users')
+                ->icon('heroicon-s-users')
                 ->description('The total count of artists')
-                ->descriptionIcon('heroicon-o-arrow-trending-up')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
+            // ->descriptionIcon('heroicon-o-arrow-trending-up')
+            // ->extraAttributes([
+            //     'class' => 'cursor-pointer',
+            // ]),
         ];
     }
     protected function getColumns(): int

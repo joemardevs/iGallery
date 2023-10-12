@@ -7,7 +7,6 @@
         <livewire:components.nav-bar />
         <div class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4">
             <div class="py-4">
-                <p>Artist:</p>
                 <h1 class="text-2xl font-semibold text-center">{{ $artist->name }}</h1>
                 <p>{{ $artistArtworks->count() > 2 ? 'Artworks' : 'Artwork' }}:</p>
             </div>

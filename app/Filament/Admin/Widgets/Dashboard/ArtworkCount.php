@@ -16,19 +16,19 @@ class ArtworkCount extends BaseWidget
         return [
             //
             Stat::make('Artworks', Artwork::count())
-                ->icon('heroicon-o-paint-brush')
-                ->description('The total count of artwork')
-                ->descriptionIcon('heroicon-o-arrow-trending-up')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
+                ->icon('heroicon-s-paint-brush')
+                ->description('The total count of artworks'),
+            // ->descriptionIcon('heroicon-o-arrow-trending-up')
+            // ->extraAttributes([
+            //     'class' => 'cursor-pointer',
+            // ]),
             Stat::make('Categories', Category::count())
-                ->icon('heroicon-o-tag')
-                ->description('The total count of artwork')
-                ->descriptionIcon('heroicon-o-arrow-trending-up')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
+                ->icon('heroicon-s-tag')
+                ->description('The total count of categories')
+            // ->descriptionIcon('heroicon-o-arrow-trending-up')
+            // ->extraAttributes([
+            //     'class' => 'cursor-pointer',
+            // ]),
         ];
     }
     protected function getColumns(): int
