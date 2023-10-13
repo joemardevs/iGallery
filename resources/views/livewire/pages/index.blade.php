@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <livewire:components.nav-bar />
-    <div class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4">
+    <div class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:px-20 lg:px-44">
         <livewire:components.success-alert />
         <h1 class="text-2xl text-center my-4 font-semibold">Home</h1>
         <hr class="dark:border-gray-700 mb-4">
@@ -14,16 +14,17 @@
                     {{-- Display this if there's a category on the artworks --}}
                     <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
                         <livewire:components.artwork-card :lazy='true' wire:key="{{ $artwork->id }}"
-                            artwork='{{ $artwork }}' title='{{ $artwork->title }}'
-                            category='{{ $artwork->category->name }}' createdDate='{{ $artwork->created_date }}'
-                            description='{{ $artwork->description }}' />
+                            artwork='{{ $artwork }}' artworkImage="{{ $artwork->artwork_image }}"
+                            title='{{ $artwork->title }}' category='{{ $artwork->category->name }}'
+                            createdDate='{{ $artwork->created_date }}' description='{{ $artwork->description }}' />
                     </a>
                 @else
                     {{-- Otherwise display this if no category on the artworks --}}
                     <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
                         <livewire:components.artwork-card :lazy='true' wire:key="{{ $artwork->id }}"
-                            artwork='{{ $artwork }}' title='{{ $artwork->title }}'
-                            createdDate='{{ $artwork->created_date }}' description='{{ $artwork->description }}' />
+                            artwork='{{ $artwork }}' artworkImage="{{ $artwork->artwork_image }}"
+                            title='{{ $artwork->title }}' createdDate='{{ $artwork->created_date }}'
+                            description='{{ $artwork->description }}' />
                     </a>
                 @endif
             @endforeach

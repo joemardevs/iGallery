@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('home');
-    }
-    return view('livewire.auth.sign-in');
+    return redirect()->route('home');
 });
 
 Route::middleware('guest')->group(function () {
@@ -61,42 +59,50 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
+
+//If authenticated view artwork/s
+Route::controller(ArtworkController::class)->group(function () {
+    Route::get('/home', 'index')
+        ->name('home');
+    Route::get('/artwork/{artwork}', 'show')
+        ->name('show.artwork');
+});
+
+
+// Filter
+Route::get('/filter', [FilterController::class, 'index'])
+    ->name('filter');
+
+//Edit profile
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'index')->name('profile');
+    Route::patch('/profile/update-profile/{user}', 'update')
+        ->name('profile.update');
+    Route::patch('profile/update-password/{user}', 'updatePassword')
+        ->name('profile.updatePassword');
+});
+
+// Show artworks by category
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/category/{category}', 'index')
+        ->name('show.artworks.by.category');
+});
+
+Route::controller(FilterController::class)->group(function () {
+    Route::get('/filter/artworks', 'show')
+        ->name('filter.artworks');
+});
+
+Route::controller(ArtistController::class)->group(function () {
+    Route::get('/artist/{artist}', 'index')
+        ->name('artist.profile');
+});
 Route::middleware('auth')->group(function () {
 
-    //If authenticated view artwork/s
-    Route::controller(ArtworkController::class)->group(function () {
-        Route::get('/home', 'index')
-            ->name('home');
-        Route::get('/artwork/{artwork}', 'show')
-            ->name('show.artwork');
-    });
-
-    // Filter
-    Route::get('/filter', [FilterController::class, 'index'])
-        ->name('filter');
-
-    //Edit profile
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/profile', 'index')->name('profile');
-        Route::patch('/profile/update-profile/{user}', 'update')
-            ->name('profile.update');
-        Route::patch('profile/update-password/{user}', 'updatePassword')
-            ->name('profile.updatePassword');
-    });
-
-    // Show artworks by category
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/category/{category}', 'index')
-            ->name('show.artworks.by.category');
-    });
-
-    Route::controller(FilterController::class)->group(function () {
-        Route::get('/filter/artworks', 'show')
-            ->name('filter.artworks');
-    });
-
-    Route::controller(ArtistController::class)->group(function () {
-        Route::get('/artist/{artist}', 'index')
-            ->name('artist.profile');
-    });
+    Route::get('/artwork/{artwork}/payment-confirmation', [PaymentController::class, 'pay'])
+        ->name('payment.confirmation');
+    Route::get('upload-artwork', [ArtistController::class, 'uploadArtworkIndex'])
+        ->name('upload.artwork.index');
+    Route::post('upload-artwork', [ArtistController::class, 'uploadArtwork'])
+        ->name('upload.artwork');
 });

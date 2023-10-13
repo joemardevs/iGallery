@@ -84,6 +84,7 @@ class UserResource extends Resource
                     ->icon('heroicon-m-envelope')
                     ->iconPosition(IconPosition::Before),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

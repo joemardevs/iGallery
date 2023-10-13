@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // 'asset_url' => 'iGallery',
+    // 'asset_url' => env('APP_URL'),
     /*
     |---------------------------------------------------------------------------
     | Class Namespace

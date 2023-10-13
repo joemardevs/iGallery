@@ -18,7 +18,7 @@
             <div>
                 <select name="category" id="category"
                     class="px-4 py-2 my-2 rounded-md bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-pointer" required>
-                    <option value="">Click here to select category</option>
+                    <option value="" disabled>Click here to select category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->name }}">{{ $category->name }}</option>
                     @endforeach

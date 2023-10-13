@@ -27,6 +27,7 @@ class ArtworkResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('artwork_image')
+                    ->label('Artwork Image')
                     ->image(),
                 Forms\Components\Textarea::make('description')
                     ->required()
@@ -90,6 +91,7 @@ class ArtworkResource extends Resource
                     ->date()
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

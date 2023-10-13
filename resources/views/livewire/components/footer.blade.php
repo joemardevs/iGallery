@@ -10,7 +10,7 @@
                 <a href="https://github.com/joemardevs" class="text-gray-600 ml-1" rel="noopener noreferrer"
                     target="_blank">@joemardevs</a>
             </p>
-            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+            {{-- <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                 <a class="text-gray-500">
                     <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         class="w-5 h-5" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@
                         <circle cx="4" cy="4" r="2" stroke="none"></circle>
                     </svg>
                 </a>
-            </span>
+            </span> --}}
         </div>
     </footer>
 </div>

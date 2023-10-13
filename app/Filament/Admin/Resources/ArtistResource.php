@@ -88,6 +88,7 @@ class ArtistResource extends Resource
                     ->iconPosition(IconPosition::Before),
 
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

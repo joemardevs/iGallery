@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class ShowArtworkCard extends Component
 {
-    public $artwork, $category, $title, $createdDate, $description, $artistName, $price;
+    public $artwork, $artworkImage, $category, $title, $createdDate, $description, $artistName, $price;
     public function placeholder()
     {
         return view('livewire.components.show-lazy-loading-artwork-card');

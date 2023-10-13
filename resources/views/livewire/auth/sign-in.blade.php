@@ -33,8 +33,14 @@
                                 Forgot Password?
                             </a>
                         </div>
-                        <div class="flex justify-center my-4">
+                        <div class="flex justify-evenly my-4">
                             <livewire:components.primary-button label='Sign In' />
+                            <a href="{{ route('home') }}">
+                                <button type="button"
+                                    class="bg-gray-500 p-2 rounded w-28 text-gray-100 hover:bg-gray-600 hover:shadow-md">
+                                    Guest
+                                </button>
+                            </a>
                         </div>
                         <div class="flex items-center mt-8 text-xs">
                             <p class="mt-[1px]">Don't have an account?</p>
