@@ -101,8 +101,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/artwork/{artwork}/payment-confirmation', [PaymentController::class, 'pay'])
         ->name('payment.confirmation');
-    Route::get('upload-artwork', [ArtistController::class, 'uploadArtworkIndex'])
-        ->name('upload.artwork.index');
-    Route::post('upload-artwork', [ArtistController::class, 'uploadArtwork'])
-        ->name('upload.artwork');
+
+    Route::middleware('is.artist')->group(function () {
+        Route::get('upload-artwork', [ArtistController::class, 'uploadArtworkIndex'])
+            ->name('upload.artwork.index');
+        Route::post('upload-artwork', [ArtistController::class, 'uploadArtwork'])
+            ->name('upload.artwork');
+    });
 });
