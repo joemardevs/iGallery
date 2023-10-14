@@ -28,17 +28,24 @@
                                 href="{{ route('artist.profile', ['artist' => $artistName]) }}">{{ $artistName }}</a></small>
                         <small>₱ {{ $price }}.00</small>
                     </div>
-                    @if ($artistName == auth()->user()->name)
-                        <div class="flex gap-12">
-                            <a href="{{ route('delete.artwork', ['artwork' => $artwork]) }}"
-                                class="bg-red-500 p-2 rounded w-full text-gray-100 text-center hover:bg-red-600 hover:shadow-md">
-                                Delete
-                            </a>
-                            <a href="{{ route('edit.artwork', ['artwork' => $artwork]) }}"
-                                class="bg-blue-500 p-2 rounded w-full text-gray-100 text-center hover:bg-blue-600 hover:shadow-md">
-                                Edit
-                            </a>
-                        </div>
+                    @if (auth()->check())
+                        @if ($artistName == auth()->user()->name)
+                            <div class="flex gap-12">
+                                <a href="{{ route('delete.artwork', ['artwork' => $artwork]) }}"
+                                    class="bg-red-500 p-2 rounded w-full text-gray-100 text-center hover:bg-red-600 hover:shadow-md">
+                                    Delete
+                                </a>
+                                <a href="{{ route('edit.artwork', ['artwork' => $artwork]) }}"
+                                    class="bg-blue-500 p-2 rounded w-full text-gray-100 text-center hover:bg-blue-600 hover:shadow-md">
+                                    Edit
+                                </a>
+                            </div>
+                        @else
+                            <button type="submit"
+                                class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
+                                Buy
+                            </button>
+                        @endif
                     @else
                         <button type="submit"
                             class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
