@@ -12,7 +12,7 @@
                 <form method="get" action="{{ route('payment.confirmation', ['artwork' => $artwork]) }}"
                     class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     @csrf
-                    {{-- @method('GET') --}}
+                    @method('GET')
                     <a href="{{ route('show.artworks.by.category', ['category' => $category]) }}"
                         class="text-sm text-gray-500">
                         {{ $category }}
@@ -28,10 +28,23 @@
                                 href="{{ route('artist.profile', ['artist' => $artistName]) }}">{{ $artistName }}</a></small>
                         <small>₱ {{ $price }}.00</small>
                     </div>
-                    <button type="submit"
-                        class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
-                        Buy
-                    </button>
+                    @if ($artistName == auth()->user()->name)
+                        <div class="flex gap-12">
+                            <a href="{{ route('delete.artwork', ['artwork' => $artwork]) }}"
+                                class="bg-red-500 p-2 rounded w-full text-gray-100 text-center hover:bg-red-600 hover:shadow-md">
+                                Delete
+                            </a>
+                            <a href="{{ route('edit.artwork', ['artwork' => $artwork]) }}"
+                                class="bg-blue-500 p-2 rounded w-full text-gray-100 text-center hover:bg-blue-600 hover:shadow-md">
+                                Edit
+                            </a>
+                        </div>
+                    @else
+                        <button type="submit"
+                            class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
+                            Buy
+                        </button>
+                    @endif
                 </form>
             </div>
         </div>

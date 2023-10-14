@@ -39,6 +39,8 @@ class ArtistController extends Controller
             'price' => ['required', 'numeric'],
             'category_id' => ['required'],
             'created_date' => ['required', 'min:3'],
+            'medium' => ['nullable'],
+            'size' => ['nullable'],
             'artwork_image' => ['required'],
         ]);
         $fileName = time() . '.' . $request->artwork_image->extension();

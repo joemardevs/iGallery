@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Artwork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -97,15 +98,28 @@ Route::controller(ArtistController::class)->group(function () {
     Route::get('/artist/{artist}', 'index')
         ->name('artist.profile');
 });
+
+//Auth middlware
 Route::middleware('auth')->group(function () {
 
+    //payment
     Route::get('/artwork/{artwork}/payment-confirmation', [PaymentController::class, 'pay'])
         ->name('payment.confirmation');
 
+    //Artist middleware
     Route::middleware('is.artist')->group(function () {
         Route::get('upload-artwork', [ArtistController::class, 'uploadArtworkIndex'])
             ->name('upload.artwork.index');
         Route::post('upload-artwork', [ArtistController::class, 'uploadArtwork'])
             ->name('upload.artwork');
+
+        Route::get('/artwork/delete/{artwork}', [ArtworkController::class, 'destroy'])
+            ->name('delete.artwork');
+
+        //Edit artwork
+        Route::get('/artwork/edit/{artwork}', [ArtworkController::class, 'edit'])
+            ->name('edit.artwork');
+        Route::post('/artwork/update/{artwork}', [ArtworkController::class, 'update'])
+            ->name('update.artwork');
     });
 });
