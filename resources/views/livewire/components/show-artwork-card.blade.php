@@ -13,10 +13,12 @@
                     class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     @csrf
                     @method('GET')
-                    <a href="{{ route('show.artworks.by.category', ['category' => $category]) }}"
-                        class="text-sm text-gray-500">
-                        {{ $category }}
-                    </a>
+                    @if ($category)
+                        <a href="{{ route('show.artworks.by.category', ['category' => $category]) }}"
+                            class="text-sm text-gray-500">
+                            {{ $category }}
+                        </a>
+                    @endif
                     <h1 class="text-gray-900 dark:text-gray-50 text-3xl font-medium mb-1">{{ $title }}
                     </h1>
                     <div class="flex mb-4">
@@ -24,8 +26,10 @@
                     </div>
                     <p class="text-justify">{{ $description }}</p>
                     <div class="flex mt-6 items-center justify-between pb-5 border-b dark:border-gray-700 mb-5">
-                        <small class="mr-3">Artist: <a
-                                href="{{ route('artist.profile', ['artist' => $artistName]) }}">{{ $artistName }}</a></small>
+                        @if ($artistName)
+                            <small class="mr-3">Artist: <a
+                                    href="{{ route('artist.profile', ['artist' => $artistName]) }}">{{ $artistName }}</a></small>
+                        @endif
                         <small>₱ {{ $price }}.00</small>
                     </div>
                     @if (auth()->check())

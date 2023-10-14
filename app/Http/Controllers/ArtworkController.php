@@ -15,7 +15,7 @@ class ArtworkController extends Controller
     public function index()
     {
         //
-        $artworks = Artwork::latest()->paginate(8);
+        $artworks = Artwork::where('is_sold', 0)->latest()->paginate(8);
         return view('livewire.pages.index', [
             'artworks' => $artworks,
         ]);
@@ -41,7 +41,7 @@ class ArtworkController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
         //
         $artwork = Artwork::findOrFail($id);

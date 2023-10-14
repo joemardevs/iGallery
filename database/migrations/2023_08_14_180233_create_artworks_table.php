@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Category::class)->nullable();
             $table->string('size')->nullable();
             $table->float('price');
+            $table->boolean('is_sold')->default(false);
             $table->string('medium')->nullable();
             $table->string('description');
             $table->date('created_date')->nullable();

@@ -1,5 +1,5 @@
 <div>
-    <nav x-data='{open : false}' class="w-screen sticky top-0">
+    <nav x-data='{open : false}' class="w-screen sticky top-0 overflow-hidden">
         <div class="px-5 py-4 bg-blue-500 dark:bg-gray-700 flex items-center justify-between shadow-md">
             <a href="{{ route('home') }}">
                 <h1 class="text-gray-50 font-bold">iGallery</h1>

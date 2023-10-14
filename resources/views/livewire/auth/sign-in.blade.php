@@ -28,11 +28,11 @@
                             <livewire:components.text-input type='password' name='password' id='password'
                                 placeholder='••••••••' autocomplete='current-password' />
                         </div>
-                        <div class="text-right my-2">
+                        {{-- <div class="text-right my-2">
                             <a href="{{ route('forgot-password') }}" class="underline font-semibold text-xs">
                                 Forgot Password?
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="flex justify-evenly my-4">
                             <livewire:components.primary-button label='Sign In' />
                             <a href="{{ route('home') }}">

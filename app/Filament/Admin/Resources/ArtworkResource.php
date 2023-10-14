@@ -28,12 +28,13 @@ class ArtworkResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('artwork_image')
                     ->label('Artwork Image')
+                    ->required()
                     ->image(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->minLength(2)
                     ->maxLength(1000)
-                    ->rows(3),
+                    ->rows(10),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->minLength(2)
@@ -65,6 +66,8 @@ class ArtworkResource extends Resource
                     ->prefix('PHP'),
                 Forms\Components\TextInput::make('medium')
                     ->maxLength(255),
+                Forms\Components\Toggle::make('is_sold')
+                    ->label('Is Sold'),
                 Forms\Components\DatePicker::make('created_date'),
             ]);
     }
@@ -86,6 +89,8 @@ class ArtworkResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money('php')
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('is_sold')
+                    ->label('Sold'),
                 Tables\Columns\TextColumn::make('created_date')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->date()

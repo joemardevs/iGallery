@@ -51,7 +51,8 @@ class UserResource extends Resource
                         ->rule(Password::default()),
                     DateTimePicker::make('email_verified_at')
                         ->required(),
-                    FileUpload::make('profile_img'),
+                    FileUpload::make('profile_img')
+                        ->label('Avatar'),
                 ])->columns(2),
                 Section::make('User New Password')->schema([
                     TextInput::make('new_password')

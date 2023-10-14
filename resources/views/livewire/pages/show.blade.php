@@ -14,7 +14,7 @@
             <livewire:components.show-artwork-card :lazy="true" wire:key="{{ $artwork->id }}"
                 artwork="{{ $artwork->id }}" artworkImage="{{ $artwork->artwork_image }}"
                 description="{{ $artwork->description }}" title="{{ $artwork->title }}"
-                artistName="{{ $artwork->artist->name }}" price="{{ $artwork->price }}" />
+                artistName="{{ $artwork->artist->name ?? '' }}" price="{{ $artwork->price }}" />
         @endif
     </div>
     <livewire:components.footer />

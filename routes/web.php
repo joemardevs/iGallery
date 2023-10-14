@@ -105,6 +105,8 @@ Route::middleware('auth')->group(function () {
     //payment
     Route::get('/artwork/{artwork}/payment-confirmation', [PaymentController::class, 'pay'])
         ->name('payment.confirmation');
+    Route::get('/artwork/payment/success', [PaymentController::class, 'success'])
+        ->name('payment.success');
 
     //Artist middleware
     Route::middleware('is.artist')->group(function () {

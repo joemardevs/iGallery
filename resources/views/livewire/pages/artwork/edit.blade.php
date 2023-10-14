@@ -56,13 +56,20 @@
             </div>
             <div class="flex flex-col">
                 <label for="artwork_image">Artwork Image</label>
-                <img src="{{ env('APP_URL') . '/storage/' . $artwork->artwork_image }}" alt="artwork-image"class="my-2">
-                <span class="text-sm text-gray-400">Upload a file below to change the artwork image.</span>
+                @if ($artwork->artwork_image)
+                    <img src="{{ env('APP_URL') . '/storage/' . $artwork->artwork_image }}"
+                        alt="artwork-image"class="my-2">
+                @endif
+                <span class="text-sm text-gray-400">Upload a file below for the artwork image.</span>
                 <input type="file" name="artwork_image" id="artwork_image"
                     value="{{ env('APP_URL') . '/storage/' . $artwork->artwork_image }}"
                     class="text-sm my-2 rounded p-2 bg-gray-300 dark:bg-gray-600 focus:outline-none focus:outline-blue-500">
             </div>
-            <div class="flex justify-center py-4">
+            <div class="flex justify-between mt-4">
+                <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}"
+                    class="bg-gray-500 p-2 rounded w-28 text-gray-100 text-center hover:bg-gray-600 hover:shadow-md">
+                    Back
+                </a>
                 <livewire:components.primary-button label='Save' />
             </div>
         </form>
