@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Transaction;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PaymentController extends Controller
 {
@@ -12,6 +16,7 @@ class PaymentController extends Controller
     public function pay($id, Request $request)
     {
         $artwork = Artwork::find($id);
+        $buyer = User::find($id);
         $data = [
             'data' => [
                 'attributes' => [
@@ -23,6 +28,14 @@ class PaymentController extends Controller
                             'name'          => $artwork->title,
                             'quantity'      => 1,
                         ]
+                    ],
+                    "payments" => [
+                        "attributes" => [
+                            "billing" => [
+                                "email" => $buyer->email,
+                                "name" => $buyer->name,
+                            ]
+                        ],
                     ],
                     'payment_method_types' => [
                         'gcash',
@@ -62,9 +75,27 @@ class PaymentController extends Controller
 
             $is_paid = $response['data']['attributes']['payments'][0]['attributes']['status'] === "paid";
             $artwork = Artwork::where('title', $response['data']['attributes']['line_items'][0]['name'])->first();
+            $buyer = User::where('email', $response['data']['attributes']['payments'][0]['attributes']['billing']['email'])->first();
+
+            //Validating transaction
+            $validatedForm = $request->validate([
+                'artwork_id' => ['nullable', Rule::exists('artworks', 'id')],
+                'user_id' => ['nullable', Rule::exists('users', 'id')],
+                'checkout_id' => ['nullable'],
+                'paid_at' => ['nullable'],
+            ]);
 
             if ($is_paid) {
+
                 $artwork->is_sold = 1;
+                //Creating transaction on database
+                $validatedForm['artwork_id'] = $artwork->id;
+                $validatedForm['user_id'] = $buyer->id;
+                $validatedForm['checkout_id'] = $response['data']['id'];
+                $validatedForm['paid_at'] = now();
+
+                Transaction::create($validatedForm);
+                //save the artwork to is_sold is true
                 $artwork->save();
             } else {
                 $artwork->is_sold = 0;
