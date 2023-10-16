@@ -15,11 +15,11 @@ class Transaction extends Model
         'checkout_id',
         'paid_at',
     ];
-    public function buyer(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function bought(): BelongsTo
+    public function artwork(): BelongsTo
     {
         return $this->belongsTo(Artwork::class);
     }
