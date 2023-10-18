@@ -15,9 +15,9 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     // getting the usertype emplty, null, user and artist and displaying it in the UserResouce.php
-    public function scopeDisplayUserOnly(Builder $query)
+    public function scopeDisplayUserAndArtistOnly(Builder $query)
     {
-        return $query->whereIn('usertype', ['user'])
+        return $query->whereIn('usertype', ['user', 'artist'])
             ->orWhereNull('usertype')
             ->orWhere('usertype', '');
     }
