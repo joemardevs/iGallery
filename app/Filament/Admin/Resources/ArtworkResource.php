@@ -90,6 +90,7 @@ class ArtworkResource extends Resource
                     ->money('php')
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_sold')
+                    ->sortable()
                     ->label('Sold'),
                 Tables\Columns\TextColumn::make('created_date')
                     ->toggleable(isToggledHiddenByDefault: true)

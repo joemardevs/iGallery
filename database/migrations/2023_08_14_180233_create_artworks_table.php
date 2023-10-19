@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('artist_id')->nullable();
             $table->string('artwork_image')->nullable();
             $table->string('title');
-            $table->foreignIdFor(Category::class)->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('size')->nullable();
             $table->float('price');
             $table->boolean('is_sold')->default(false);
@@ -30,6 +30,9 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->where('usertype', '=', 'artist');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories');
         });
     }
 

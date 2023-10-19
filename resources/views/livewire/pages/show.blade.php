@@ -8,13 +8,15 @@
         @if ($artwork->category)
             <livewire:components.show-artwork-card :lazy="true" wire:key="{{ $artwork->id }}"
                 artwork="{{ $artwork->id }}" artworkImage="{{ $artwork->artwork_image }}" title="{{ $artwork->title }}"
-                category="{{ $artwork->category->name }}" description="{{ $artwork->description }}"
-                artistName="{{ $artwork->artist->name }}" price="{{ $artwork->price }}" />
+                createdDate='{{ $artwork->created_date }}' category="{{ $artwork->category->name }}"
+                description="{{ $artwork->description }}" artistName="{{ $artwork->artist->name }}"
+                price="{{ $artwork->price }}" />
         @else
             <livewire:components.show-artwork-card :lazy="true" wire:key="{{ $artwork->id }}"
-                artwork="{{ $artwork->id }}" artworkImage="{{ $artwork->artwork_image }}"
-                description="{{ $artwork->description }}" title="{{ $artwork->title }}"
-                artistName="{{ $artwork->artist->name ?? '' }}" price="{{ $artwork->price }}" />
+                createdDate='{{ $artwork->created_date }}' artwork="{{ $artwork->id }}"
+                artworkImage="{{ $artwork->artwork_image }}" description="{{ $artwork->description }}"
+                title="{{ $artwork->title }}" artistName="{{ $artwork->artist->name ?? '' }}"
+                price="{{ $artwork->price }}" />
         @endif
     </div>
     <livewire:components.footer />

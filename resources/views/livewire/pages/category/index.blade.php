@@ -12,7 +12,8 @@
             @foreach ($artworks as $artwork)
                 <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
                     <livewire:components.artwork-card :lazy='true' wire:key="{{ $artwork->id }}"
-                        artwork='{{ $artwork }}' title='{{ $artwork->title }}' category='{{ $artwork->category->name }}'
+                        artwork='{{ $artwork }}' artworkImage="{{ $artwork->artwork_image }}"
+                        title='{{ $artwork->title }}' category='{{ $artwork->category->name }}'
                         createdDate='{{ $artwork->created_date }}' description='{{ $artwork->description }}' />
                 </a>
             @endforeach
