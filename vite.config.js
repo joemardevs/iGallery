@@ -9,7 +9,7 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: "igallery.test",
+        // host: "igallery.test",
         hmr: true,
     },
 });

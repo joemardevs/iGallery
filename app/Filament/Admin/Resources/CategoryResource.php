@@ -69,13 +69,6 @@ class CategoryResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            RelationManagers\ArtworksRelationManager::class
-        ];
-    }
-
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -84,6 +77,13 @@ class CategoryResource extends Resource
                     ->size(TextEntrySize::Large)
                     ->weight(FontWeight::ExtraBold)
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\ArtworksRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
