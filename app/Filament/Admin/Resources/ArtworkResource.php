@@ -29,7 +29,8 @@ class ArtworkResource extends Resource
                 Forms\Components\FileUpload::make('artwork_image')
                     ->label('Artwork Image')
                     ->required()
-                    ->image(),
+                    ->image()
+                    ->optimize('webp'),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->minLength(2)
@@ -90,6 +91,7 @@ class ArtworkResource extends Resource
                     ->money('php')
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_sold')
+                    ->sortable()
                     ->label('Sold'),
                 Tables\Columns\TextColumn::make('created_date')
                     ->toggleable(isToggledHiddenByDefault: true)

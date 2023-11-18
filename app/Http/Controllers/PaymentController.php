@@ -16,7 +16,7 @@ class PaymentController extends Controller
     public function pay($id, Request $request)
     {
         $artwork = Artwork::find($id);
-        $buyer = User::find($id);
+        $buyer = auth()->user();
         $data = [
             'data' => [
                 'attributes' => [
@@ -84,6 +84,10 @@ class PaymentController extends Controller
                 'checkout_id' => ['nullable'],
                 'paid_at' => ['nullable'],
             ]);
+            
+            if($buyer === null){
+                abort(403, 'You must buy a artwork with your email and name logged in.');
+            }
 
             if ($is_paid) {
 
@@ -105,9 +109,16 @@ class PaymentController extends Controller
             $request->session()->forget('payment_sessionId');
 
             return view('livewire.pages.payment.success', [
-                'title' => $title
+                'title' => $title,
+                'artwork_name' => $artwork->title,
+                'buyer_name' => $buyer->name,
+                'reference_number' => $response['data']['id'],
+                'payment_time' => now(),
+                'payment_method' => $response['data']['attributes']['payment_method_types'][0],
+                'amount' => $response['data']['attributes']['line_items'][0]['amount'] / 100
             ]);
         }
+
         abort(403, 'You must buy a artwork to igallery.');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artwork;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ArtworkController extends Controller
 {
@@ -15,7 +15,7 @@ class ArtworkController extends Controller
     public function index()
     {
         //
-        $artworks = Artwork::where('is_sold', 0)->latest()->paginate(8);
+        $artworks = Artwork::latest()->paginate(8);
         return view('livewire.pages.index', [
             'artworks' => $artworks,
         ]);
@@ -110,8 +110,10 @@ class ArtworkController extends Controller
         }
 
         if ($request->artwork_image) {
-            $fileName = time() . '.' . $request->artwork_image->extension();
-            $request->artwork_image->storeAs('public', $fileName);
+            $fileName = "iGallery-" . time() . '.webp';
+
+            $artworkImg = Image::make($request->artwork_image);
+            $artworkImg->save(public_path('storage/' . $fileName), 20, "webp");
             $artwork->artwork_image = $fileName;
             $hasChange = true;
         }

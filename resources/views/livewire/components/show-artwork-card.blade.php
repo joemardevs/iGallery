@@ -1,21 +1,22 @@
+@php use App\Models\Artwork; @endphp
 <div>
     <section class="text-gray-400 bg-gray-50 dark:bg-gray-900 overflow-hidden">
         <div class="container px-4 py-8 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap">
                 @if ($artworkImage)
                     <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                        src="{{ env('APP_URL') . '/storage/' . $artworkImage }}" alt="artwork">
+                         src="{{ env('APP_URL') . '/storage/' . $artworkImage }}" alt="artwork">
                 @else
                     <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400"
-                        alt="artwork">
+                         alt="artwork">
                 @endif
                 <form method="get" action="{{ route('payment.confirmation', ['artwork' => $artwork]) }}"
-                    class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                      class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     @csrf
                     @method('GET')
                     @if ($category)
                         <a href="{{ route('show.artworks.by.category', ['category' => $category]) }}"
-                            class="text-sm text-gray-500">
+                           class="text-sm text-gray-500">
                             {{ $category }}
                         </a>
                     @endif
@@ -36,24 +37,30 @@
                         @if ($artistName == auth()->user()->name)
                             <div class="flex gap-12">
                                 <a href="{{ route('delete.artwork', ['artwork' => $artwork]) }}"
-                                    class="bg-red-500 p-2 rounded w-full text-gray-100 text-center hover:bg-red-600 hover:shadow-md">
+                                   class="bg-red-500 p-2 rounded w-full text-gray-100 text-center hover:bg-red-600 hover:shadow-md">
                                     Delete
                                 </a>
                                 <a href="{{ route('edit.artwork', ['artwork' => $artwork]) }}"
-                                    class="bg-blue-500 p-2 rounded w-full text-gray-100 text-center hover:bg-blue-600 hover:shadow-md">
+                                   class="bg-blue-500 p-2 rounded w-full text-gray-100 text-center hover:bg-blue-600 hover:shadow-md">
                                     Edit
                                 </a>
                             </div>
                         @else
-                            <button type="submit"
-                                class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
-                                Buy
+                            @php
+                                $getArtwork = Artwork::find($artwork);
+                            @endphp
+                            <button type="submit" {{ $getArtwork->is_sold ? "disabled='disabled'" : '' }}
+                                class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md {{ $getArtwork->is_sold ? 'bg-gray-500 hover:bg-gray-500' : 'Buy' }}">
+                                {{ $getArtwork->is_sold ? 'This artwork was sold' : 'Buy' }}
                             </button>
                         @endif
                     @else
-                        <button type="submit"
-                            class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md">
-                            Buy
+                        @php
+                            $getArtwork = Artwork::find($artwork);
+                        @endphp
+                        <button type="submit" {{ $getArtwork->is_sold ? "disabled='disabled'" : '' }}
+                                class="bg-blue-500 p-2 rounded w-full text-gray-100 hover:bg-blue-600 hover:shadow-md {{ $getArtwork->is_sold ? 'bg-gray-500 hover:bg-gray-500' : 'Buy' }}">
+                            {{ $getArtwork->is_sold ? 'This artwork was sold' : 'Buy' }}
                         </button>
                     @endif
                 </form>

@@ -14,6 +14,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -53,6 +54,13 @@ class UserResource extends Resource
                         ->required(),
                     FileUpload::make('profile_img')
                         ->label('Avatar'),
+                    Select::make('usertype')
+                        ->options([
+                            'user' => 'User',
+                            'artist' => 'Artist',
+                        ])
+                        ->native(false)
+                        ->label('Usertype'),
                 ])->columns(2),
                 Section::make('User New Password')->schema([
                     TextInput::make('new_password')
@@ -73,17 +81,22 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->query(User::displayUserOnly())
+            ->query(User::displayUserAndArtistOnly())
             ->columns([
                 //
                 ImageColumn::make('profile_img')
                     ->label('Avatar')
                     ->circular()
                     ->defaultImageUrl(fn ($record) => $record->avatar_url),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('email')->searchable()
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->searchable()
                     ->icon('heroicon-m-envelope')
                     ->iconPosition(IconPosition::Before),
+                TextColumn::make('usertype')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

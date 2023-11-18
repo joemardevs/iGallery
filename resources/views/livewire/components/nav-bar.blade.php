@@ -50,7 +50,7 @@
                             </a>
                         @endif
                     </div>
-                    <div class="flex justify-between w-80">
+                    <div class="flex justify-between w-80 pb-10">
                         @if (auth()->check())
                             <a href="{{ route('logout') }}"
                                 class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded flex justify-center items-center">

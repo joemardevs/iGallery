@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ArtistController extends Controller
 {
@@ -43,8 +44,10 @@ class ArtistController extends Controller
             'size' => ['nullable'],
             'artwork_image' => ['required'],
         ]);
-        $fileName = time() . '.' . $request->artwork_image->extension();
-        $request->artwork_image->storeAs('public', $fileName);
+        $fileName = "iGallery-" . time() . '.webp';
+
+        $artworkImg = Image::make($request->artwork_image);
+        $artworkImg->save(public_path('storage/' . $fileName), 20, "webp");
         $validatedForm['artwork_image'] = $fileName;
         $validatedForm['artist_id'] = $artist_id;
         Artwork::create($validatedForm);

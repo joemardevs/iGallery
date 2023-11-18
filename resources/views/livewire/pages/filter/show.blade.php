@@ -11,9 +11,11 @@
         <div class="md:grid grid-cols-4 gap-4">
             @forelse ($artworks as $artwork)
                 <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}">
-                    <livewire:components.artwork-card :lazy='true' wire:key="{{ $artwork->id }}"
-                        artwork='{{ $artwork }}' title='{{ $artwork->title }}' category='{{ $artwork->category->name }}'
-                        createdDate='{{ $artwork->created_date }}' description='{{ $artwork->description }}' />
+                    <livewire:components.artwork-card :lazy="true" wire:key="{{ $artwork->id }}"
+                        artwork="{{ $artwork->id }}" artworkImage="{{ $artwork->artwork_image }}"
+                        title="{{ $artwork->title }}" createdDate='{{ $artwork->created_date }}'
+                        category="{{ $artwork->category->name }}" description="{{ $artwork->description }}"
+                        artistName="{{ $artwork->artist->name }}" price="{{ $artwork->price }}" />
                 </a>
             @empty
                 <h1 class="text-center pb-80">No found</h1>
