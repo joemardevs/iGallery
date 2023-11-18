@@ -26,6 +26,10 @@ Route::get('/create-symlink', function () {
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b29ad7d7ea490807450ac6558fbebe79959c8ec
 Route::get('/', function () {
     return redirect()->route('home');
 });
