@@ -18,12 +18,15 @@ return new class extends Migration
             $table->string('artwork_image')->nullable();
             $table->string('title');
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->string('theme');
             $table->string('size')->nullable();
             $table->float('price');
             $table->boolean('is_sold')->default(false);
             $table->string('medium')->nullable();
             $table->string('description');
             $table->date('created_date')->nullable();
+            $table->string('contact');
+            $table->string('address');
             $table->timestamps();
 
             $table->foreign('artist_id')

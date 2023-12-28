@@ -18,10 +18,10 @@
                                 {{ $category }}
                             </h2>
                             <h1 class="text-xl font-medium text-gray-900 dark:text-gray-50">
-                                {{ $title }}
+                                {{ Str::limit($title, 8) }}
                             </h1>
                             <small>Created at {{ date('M d, Y', strtotime($createdDate)) }}</small>
-                            <p class="leading-relaxed mb-3">{{ Str::limit($description, 50) }}</p>
+                            <p class="leading-relaxed mb-3">{{ Str::limit($description, 40) }}</p>
                         </div>
                     </div>
                 </div>

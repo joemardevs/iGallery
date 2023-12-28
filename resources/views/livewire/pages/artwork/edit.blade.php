@@ -47,7 +47,7 @@
             <div class="flex flex-col">
                 <label for="medium">Medium</label>
                 <input type="text" name="medium" id="medium" placeholder="Optional" value="{{ $artwork->medium }}"
-                    class="text-sm my-2 rounded p-2 bg-gray-300 dark:bg-gray-600 focus:outline-none focus:outline-blue-500">
+                    class="text-sm my-2 rounded p-2 bg-gray-300 dark:bg-gray-600 focus:ocleautline-none focus:outline-blue-500">
             </div>
             <div class="flex flex-col">
                 <label for="size">Size</label>
@@ -58,14 +58,14 @@
                 <label for="artwork_image">Artwork Image</label>
                 @if ($artwork->artwork_image)
                     <img src="{{ env('APP_URL') . '/storage/' . $artwork->artwork_image }}"
-                        alt="artwork-image"class="my-2">
+                        alt="artwork-image"class="my-2 lg:h-96 md:h-72 w-full object-cover object-center">
                 @endif
                 <span class="text-sm text-gray-400">Upload a file below for the artwork image.</span>
                 <input type="file" name="artwork_image" id="artwork_image"
                     value="{{ env('APP_URL') . '/storage/' . $artwork->artwork_image }}"
                     class="text-sm my-2 rounded p-2 bg-gray-300 dark:bg-gray-600 focus:outline-none focus:outline-blue-500">
             </div>
-            <div class="flex justify-between mt-4">
+            <div class="flex justify-between md:justify-start gap-4 mt-4">
                 <a href="{{ route('show.artwork', ['artwork' => $artwork]) }}"
                     class="bg-gray-500 p-2 rounded w-28 text-gray-100 text-center hover:bg-gray-600 hover:shadow-md">
                     Back

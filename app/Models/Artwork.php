@@ -10,6 +10,9 @@ class Artwork extends Model
 {
     use HasFactory;
     protected static $unguarded = true;
+    protected $casts = [
+        'theme' => 'array',
+    ];
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

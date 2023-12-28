@@ -2,7 +2,7 @@
     <nav x-data='{open : false}' class="w-screen sticky top-0 overflow-hidden">
         <div class="px-5 py-4 bg-blue-500 dark:bg-gray-700 flex items-center justify-between shadow-md">
             <a href="{{ route('home') }}">
-                <h1 class="text-gray-50 font-bold">iGallery</h1>
+                <h1 class="text-gray-50 font-extrabold font-merienda text-xl">{{ config('app.name') }}</h1>
             </a>
             <button @click="open = !open" type="button"
                 class="w-10 h-10 grid place-items-center rounded hover:bg-gray-700">
@@ -43,12 +43,12 @@
                         <a href="{{ route('filter') }}" class="px-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
                             <p class="p-2" @click="open = !open">Filter</p>
                         </a>
-                        @if (auth()->check() && auth()->user()->usertype == 'artist')
-                            <a href="{{ route('upload.artwork.index') }}"
-                                class="px-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
-                                <p class="p-2" @click="open = !open">Upload Artwork</p>
-                            </a>
-                        @endif
+{{--                        @if (auth()->check() && auth()->user()->usertype == 'artist')--}}
+{{--                            <a href="{{ route('upload.artwork.index') }}"--}}
+{{--                                class="px-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600">--}}
+{{--                                <p class="p-2" @click="open = !open">Upload Artwork</p>--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
                     </div>
                     <div class="flex justify-between w-80 pb-10">
                         @if (auth()->check())

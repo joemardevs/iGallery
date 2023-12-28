@@ -7,6 +7,7 @@ use App\Models\Artwork;
 use App\Models\Category;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -51,6 +52,9 @@ class ArtworkResource extends Resource
                                 ->required()
                         ]
                     ),
+                TagsInput::make('theme')
+                    ->label('Theme')
+                    ->placeholder('Add a theme'),
                 Forms\Components\Select::make('artist_id')
                     ->label('Artist')
                     ->required()
@@ -59,6 +63,10 @@ class ArtworkResource extends Resource
                         // Retrieve artists from the User model with usertype 'artist'
                         return User::where('usertype', 'artist')->pluck('name', 'id');
                     }),
+                Forms\Components\TextInput::make('contact')
+                    ->required(),
+                Forms\Components\TextInput::make('address')
+                    ->required(),
                 Forms\Components\TextInput::make('size')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
@@ -91,7 +99,6 @@ class ArtworkResource extends Resource
                     ->money('php')
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_sold')
-                    ->sortable()
                     ->label('Sold'),
                 Tables\Columns\TextColumn::make('created_date')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -122,6 +129,11 @@ class ArtworkResource extends Resource
             //
         ];
     }
+
+    // public static function getNavigationBadge(): ?string
+    // {
+    //     return static::getModel()::count();
+    // }
 
     public static function getPages(): array
     {

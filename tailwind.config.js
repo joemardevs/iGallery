@@ -10,6 +10,7 @@ export default {
         extend: {
             fontFamily: {
                 poppins: ["Poppins", "sans-serif"],
+                merienda: ["Merienda", "Poppins", "sans-serif"],
             },
         },
     },

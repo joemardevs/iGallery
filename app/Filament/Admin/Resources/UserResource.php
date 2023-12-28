@@ -50,8 +50,6 @@ class UserResource extends Resource
                         ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                         ->visible(fn ($livewire) => $livewire instanceof CreateUser)
                         ->rule(Password::default()),
-                    DateTimePicker::make('email_verified_at')
-                        ->required(),
                     FileUpload::make('profile_img')
                         ->label('Avatar'),
                     Select::make('usertype')

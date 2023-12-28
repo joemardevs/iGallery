@@ -2,13 +2,28 @@
     <footer class="text-gray-600 bg-gray-100 w-screen">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a class="flex font-medium items-center md:justify-start justify-center text-gray-900">
-                <span class="ml-3 text-xl">{{ config('app.name') }}</span>
+                <span class="ml-3 text-xl font-extrabold font-merienda">{{ config('app.name') }}</span>
             </a>
             <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">©
                 {{ date('Y') }}
                 {{ config('app.name') }} — Developed by
                 <a href="https://github.com/joemardevs" class="text-gray-600 ml-1" rel="noopener noreferrer"
                     target="_blank">@joemardevs</a>
+            </p>
+            <p
+                class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 hover:underline">
+                <a href="https://provinceofisabela.ph/index.php/79-articles/general-info" target="_blank">About
+                    Isabela</a>
+            </p>
+            <p
+                class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 hover:underline">
+                <a href="https://provinceofisabela.ph/index.php/general-info/history-culture" target="_blank">History &
+                    Culter of
+                    Isabela</a>
+            </p>
+            <p
+                class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 hover:underline">
+                <a href="{{ route('privacy-policy') }}" target="_blank">Privacy Policy</a>
             </p>
             {{-- <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                 <a class="text-gray-500">

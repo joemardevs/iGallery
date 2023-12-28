@@ -39,6 +39,9 @@ class PaymentController extends Controller
                     ],
                     'payment_method_types' => [
                         'gcash',
+                        'card',
+                        // 'dob',
+                        // 'dob_ubp',
                         // 'paymaya',
                     ],
                     'success_url' => env('APP_URL') . '/artwork/payment/success',
@@ -84,8 +87,8 @@ class PaymentController extends Controller
                 'checkout_id' => ['nullable'],
                 'paid_at' => ['nullable'],
             ]);
-            
-            if($buyer === null){
+
+            if ($buyer === null) {
                 abort(403, 'You must buy a artwork with your email and name logged in.');
             }
 
@@ -110,34 +113,15 @@ class PaymentController extends Controller
 
             return view('livewire.pages.payment.success', [
                 'title' => $title,
-<<<<<<< HEAD
                 'artwork_name' => $artwork->title,
-=======
-                'artwork' => $artwork->title,
->>>>>>> 1b29ad7d7ea490807450ac6558fbebe79959c8ec
                 'buyer_name' => $buyer->name,
                 'reference_number' => $response['data']['id'],
                 'payment_time' => now(),
                 'payment_method' => $response['data']['attributes']['payment_method_types'][0],
-<<<<<<< HEAD
                 'amount' => $response['data']['attributes']['line_items'][0]['amount'] / 100
             ]);
         }
 
-=======
-                'amount' => $response['data']['attributes']['line_items'][0]['amount']
-            ]);
-        }
-        // return view('livewire.pages.payment.success', [
-        //     'title' => $title,
-        //     'artwork_name' => $artwork->title,
-        //     'buyer_name' => $buyer->name,
-        //     'reference_number' => $response['data']['id'],
-        //     'payment_time' => now(),
-        //     'payment_method' => $response['data']['attributes']['payment_method_types'][0],
-        //     'amount' => $response['data']['attributes']['line_items'][0]['amount']
-        // ]);
->>>>>>> 1b29ad7d7ea490807450ac6558fbebe79959c8ec
         abort(403, 'You must buy a artwork to igallery.');
     }
 }

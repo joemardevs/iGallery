@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Pages\Index;
+use App\Livewire\Pages\PrivacyPolicy\Index as PrivacyPolicyIndex;
 use App\Models\Artwork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +28,6 @@ Route::get('/create-symlink', function () {
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 1b29ad7d7ea490807450ac6558fbebe79959c8ec
 Route::get('/', function () {
     return redirect()->route('home');
 });
@@ -133,3 +131,6 @@ Route::middleware('auth')->group(function () {
             ->name('update.artwork');
     });
 });
+
+Route::get('/privacy-policy', PrivacyPolicyIndex::class)
+    ->name('privacy-policy');
