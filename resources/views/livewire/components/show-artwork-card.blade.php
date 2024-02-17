@@ -46,7 +46,7 @@
                         </div>
                         <p>₱{{ number_format($price) }}.00</p>
                     </div>
-                    <div class="flex items-center gap-2 mt-2 pb-2 border-b dark:border-gray-700 mb-10">
+                    <div class="flex flex-wrap items-center gap-2 mt-2 pb-2 border-b dark:border-gray-700 mb-10">
                         @foreach (json_decode(html_entity_decode($theme)) as $themeOfArtwork)
                             <p>#{{ $themeOfArtwork }}</p>
                         @endforeach
